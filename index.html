@@ -35,7 +35,7 @@
     .logo-sm .l-S { font-size:28px; }
     .logo-sm .l-t,.logo-sm .l-a,.logo-sm .l-b,.logo-sm .l-l,.logo-sm .l-e2 { font-size:22px; }
 
-    .hero { background:linear-gradient(165deg,var(--dark) 0%,#2a2a4a 100%); padding:60px 24px 52px; text-align:center; position:relative; overflow:hidden; }
+    .hero { background:var(--dark); padding:60px 24px 52px; text-align:center; position:relative; overflow:hidden; }
     .dot { position:absolute; border-radius:50%; opacity:0.15; }
     .badge { display:inline-flex; align-items:center; gap:10px; padding:11px 26px; border-radius:50px; background:rgba(19,146,160,0.12); border:1.5px solid rgba(19,146,160,0.25); margin-bottom:24px; }
     .badge-dot { width:10px; height:10px; border-radius:50%; background:var(--teal); animation:pulse 2s infinite; }
@@ -62,14 +62,11 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="dot" style="width:8px;height:8px;background:var(--teal);top:20px;left:10%"></div>
-  <div class="dot" style="width:10px;height:10px;background:var(--corail);top:50px;left:26%"></div>
-  <div class="dot" style="width:12px;height:12px;background:var(--orange);top:80px;left:42%"></div>
-  <div class="dot" style="width:14px;height:14px;background:var(--mauve);top:30px;left:58%"></div>
-  <div class="dot" style="width:16px;height:16px;background:var(--teal);top:90px;left:74%"></div>
-  <div class="dot" style="width:18px;height:18px;background:var(--corail);top:60px;left:90%"></div>
 
-  <img src="logo-WeStable-avec-tagline-sombre.png" alt="WeStable — L'écurie connectée" style="height:120px;margin-bottom:24px">
+
+  <img src="logo-WeStable-sans-tagline-sombre.png" alt="WeStable" style="height:120px;margin-bottom:12px;mix-blend-mode:lighten">
+
+  <div style="font-size:16px;letter-spacing:5px;color:var(--mauve);text-transform:uppercase;margin-bottom:24px;font-family:'Lora',serif;font-style:italic">L'écurie connectée</div>
 
   <div class="badge">
     <div class="badge-dot"></div>
@@ -118,7 +115,7 @@
 
 <!-- FOOTER -->
 <div style="text-align:center;padding:32px 24px;background:var(--dark)">
-  <img src="logo-WeStable-avec-tagline-sombre.png" alt="WeStable" style="height:60px;margin-bottom:14px">
+  <img src="logo-WeStable-sans-tagline-sombre.png" alt="WeStable" style="height:50px;margin-bottom:8px;mix-blend-mode:lighten">
   <div style="font-size:14px;color:#666">westable.app • V1 • Écuries de Feucherolles</div>
 </div>
 
