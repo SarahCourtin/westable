@@ -1,277 +1,40 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WeStable — L'écurie connectée</title>
-  <meta name="description" content="WeStable — 15 modules pour gérer le quotidien de votre écurie. Paddocks, planning, cours, messagerie, santé, concours. 100% gratuit. Coming Soon été 2026.">
-  <meta property="og:title" content="WeStable — L'écurie connectée">
-  <meta property="og:description" content="15 modules pour gérer le quotidien de votre écurie. 100% gratuit. Coming Soon été 2026.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://westable.app">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --teal: #1392A0;
-      --corail: #EE766B;
-      --orange: #F2903C;
-      --mauve: #A76F8C;
-      --dark: #1A1A2E;
-      --green: #22c55e;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #fafafa; font-family: 'Lora', 'Georgia', serif; color: #1a1a1a; }
-    .ui { font-family: 'Inter', system-ui, sans-serif; }
 
-    /* Logo */
-    .logo { display: inline-flex; align-items: baseline; }
-    .logo span { font-weight: 700; font-family: 'Lora', 'Georgia', serif; display: inline-block; }
 
-    /* Hero */
-    .hero { background: linear-gradient(165deg, var(--dark) 0%, #2a2a4a 100%); padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden; }
-    .dot { position: absolute; border-radius: 50%; opacity: 0.2; }
-    .tagline { font-size: 12px; letter-spacing: 4px; color: var(--mauve); text-transform: uppercase; margin-top: 8px; margin-bottom: 20px; }
 
-    /* Badge */
-    .badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 24px; border-radius: 50px; background: rgba(19,146,160,0.12); border: 1.5px solid rgba(19,146,160,0.25); margin-bottom: 20px; }
-    .badge-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
-    .badge-text { font-size: 14px; font-weight: 600; color: var(--teal); letter-spacing: 1px; font-family: 'Inter', system-ui; }
 
-    /* Stats */
-    .stats { display: flex; justify-content: center; gap: 36px; margin-top: 12px; }
-    .stat-value { font-size: 26px; font-weight: 800; font-family: 'Inter', system-ui; }
-    .stat-label { font-size: 10px; color: #8888aa; text-transform: uppercase; letter-spacing: 1.5px; }
 
-    /* Modules */
-    .section { max-width: 880px; margin: 0 auto; padding: 36px 24px; }
-    .section-label { font-size: 10px; letter-spacing: 3px; color: var(--mauve); text-transform: uppercase; margin-bottom: 6px; text-align: center; }
-    .section-title { font-size: 24px; font-weight: 400; text-align: center; margin-bottom: 16px; }
-    .section-title b { font-weight: 700; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 
-    .module { padding: 18px 20px; border-radius: 14px; background: #fff; border: 1.5px solid #f0f0f0; transition: all 0.2s ease; cursor: default; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
-    .module:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
-    .module-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-    .module-icon { font-size: 22px; }
-    .module-title { font-size: 15px; font-weight: 700; color: var(--dark); font-family: 'Inter', system-ui; }
-    .module-desc { font-size: 12px; color: #777; line-height: 1.5; }
+W
+e
+S
+t
+a
+b
+l
+e
+L'ÉCURIE CONNECTÉE
 
-    /* Roles */
-    .roles-section { background: linear-gradient(165deg, var(--dark) 0%, #2a2a4a 100%); padding: 36px 24px; }
-    .role { padding: 18px 20px; border-radius: 14px; }
-    .role-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .role-avatar { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-    .role-name { font-size: 15px; font-weight: 700; color: #fff; }
-    .role-label { font-size: 11px; font-weight: 600; }
-    .role-action { display: flex; align-items: flex-start; gap: 6px; font-size: 11px; color: #bbb; line-height: 1.4; }
-    .role-actions { display: flex; flex-direction: column; gap: 4px; }
-
-    /* Principles */
-    .principle { padding: 18px 16px; border-radius: 14px; background: #fff; border: 1px solid #f0f0f0; text-align: center; }
-    .principle-icon { font-size: 26px; margin-bottom: 6px; }
-    .principle-title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 4px; font-family: 'Inter', system-ui; }
-    .principle-desc { font-size: 11px; color: #888; line-height: 1.5; }
-
-    /* Footer */
-    .footer { text-align: center; padding: 28px 24px; background: var(--dark); }
-    .footer-social { display: flex; justify-content: center; gap: 20px; margin-bottom: 12px; }
-    .footer-social span { font-size: 12px; color: #555; }
-    .footer-info { font-size: 11px; color: #444; }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.3); }
-    }
-
-    @media (max-width: 640px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .grid-3 { grid-template-columns: 1fr; }
-      .stats { gap: 20px; }
-      .stat-value { font-size: 22px; }
-      .hero h1 { font-size: 22px; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- HERO -->
-  <div class="hero">
-    <div class="dot" style="width:8px;height:8px;background:var(--teal);top:20px;left:10%"></div>
-    <div class="dot" style="width:10px;height:10px;background:var(--corail);top:50px;left:26%"></div>
-    <div class="dot" style="width:12px;height:12px;background:var(--orange);top:80px;left:42%"></div>
-    <div class="dot" style="width:14px;height:14px;background:var(--mauve);top:30px;left:58%"></div>
-    <div class="dot" style="width:16px;height:16px;background:var(--teal);top:90px;left:74%"></div>
-    <div class="dot" style="width:18px;height:18px;background:var(--corail);top:60px;left:90%"></div>
-
-    <!-- Logo -->
-    <div class="logo">
-      <span style="font-size:52px;color:var(--teal);transform:rotate(-14deg)">W</span>
-      <span style="font-size:42px;color:var(--corail);transform:rotate(-14deg)">e</span>
-      <span style="font-size:48px;color:var(--orange);margin-left:8px">S</span>
-      <span style="font-size:42px;color:var(--mauve)">t</span>
-      <span style="font-size:42px;color:var(--teal)">a</span>
-      <span style="font-size:42px;color:var(--corail)">b</span>
-      <span style="font-size:42px;color:var(--orange)">l</span>
-      <span style="font-size:42px;color:var(--mauve)">e</span>
-    </div>
-    <div class="tagline">L'écurie connectée</div>
-
-    <!-- Badge -->
-    <div class="badge">
-      <div class="badge-dot"></div>
-      <span class="badge-text">COMING SOON — ÉTÉ 2026</span>
-    </div>
-
-    <div style="max-width:560px;margin:0 auto">
-      <h1 style="font-size:26px;font-weight:400;color:#fff;line-height:1.4;margin-bottom:12px">
-        <span style="color:var(--teal);font-weight:700">15 modules</span> pour gérer le quotidien de votre écurie
-      </h1>
-      <p style="font-size:14px;color:#8888aa;line-height:1.6;margin-bottom:24px">
-        Paddocks, planning, cours, messagerie, santé, concours… tout dans une seule app. <span style="color:#aaa;font-weight:600">100% gratuit.</span>
-      </p>
-    </div>
-
-    <!-- Stats -->
-    <div class="stats">
-      <div style="text-align:center">
-        <div class="stat-value" style="color:var(--teal)">15</div>
-        <div class="stat-label">modules</div>
-      </div>
-      <div style="text-align:center">
-        <div class="stat-value" style="color:var(--corail)">6</div>
-        <div class="stat-label">rôles</div>
-      </div>
-      <div style="text-align:center">
-        <div class="stat-value" style="color:var(--mauve)">0€</div>
-        <div class="stat-label">tout gratuit</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULES -->
-  <div class="section">
-    <div class="section-label">Ce qui arrive</div>
-    <div class="section-title">Les <b style="color:var(--teal)">15 modules</b> de WeStable</div>
-    <div class="grid-2" id="modules-grid"></div>
-  </div>
-
-  <!-- ROLES -->
-  <div class="roles-section">
-    <div style="max-width:880px;margin:0 auto">
-      <div class="section-label" style="text-align:center;margin-bottom:6px">Une seule app, des permissions différentes</div>
-      <h2 style="font-size:22px;font-weight:400;color:#fff;text-align:center;margin-bottom:24px">6 rôles — <span style="color:var(--corail);font-weight:700">qui fait quoi</span></h2>
-      <div class="grid-2" id="roles-grid"></div>
-    </div>
-  </div>
-
-  <!-- PRINCIPLES -->
-  <div class="section">
-    <div class="section-title">Les <b style="color:var(--orange)">principes</b></div>
-    <div class="grid-3" id="principles-grid"></div>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="logo" style="transform:scale(0.55);transform-origin:center;margin-bottom:-8px">
-      <span style="font-size:52px;color:var(--teal);transform:rotate(-14deg)">W</span>
-      <span style="font-size:42px;color:var(--corail);transform:rotate(-14deg)">e</span>
-      <span style="font-size:48px;color:var(--orange);margin-left:8px">S</span>
-      <span style="font-size:42px;color:var(--mauve)">t</span>
-      <span style="font-size:42px;color:var(--teal)">a</span>
-      <span style="font-size:42px;color:var(--corail)">b</span>
-      <span style="font-size:42px;color:var(--orange)">l</span>
-      <span style="font-size:42px;color:var(--mauve)">e</span>
-    </div>
-    <div style="font-size:10px;letter-spacing:3px;color:var(--mauve);text-transform:uppercase;margin-top:6px;margin-bottom:12px">L'écurie connectée</div>
-    <div class="footer-social">
-      <span>@westable</span>
-      <span>@westable</span>
-      <span>@westable</span>
-    </div>
-    <div class="footer-info">westable.app • westable.fr • Été 2026</div>
-  </div>
-
-  <script>
-    const TEAL = "#1392A0", CORAIL = "#EE766B", ORANGE = "#F2903C", MAUVE = "#A76F8C", GREEN = "#22c55e";
-
-    const modules = [
-      { icon: "📊", title: "Tableau de bord", desc: "Tout voir en ouvrant l'app : paddocks du jour, planning, alertes, messages", color: TEAL },
-      { icon: "🐾", title: "Mes animaux", desc: "Fiche cheval complète : présentation, identification, couvertures, compatibilités, intervenants", color: TEAL },
-      { icon: "📓", title: "Journal", desc: "Noter la forme du cheval chaque jour (1→5), humeur, photos, état physique — privé pour le propriétaire", color: MAUVE },
-      { icon: "🌿", title: "Paddocks", desc: "Attribution semaine, vue jour, créneaux libres, volontaires, règles, compatibilités", color: GREEN },
-      { icon: "📅", title: "Planning", desc: "Mon planning + planning écurie : cours, occupation carrières/manège, RDV, paddocks, concours", color: TEAL },
-      { icon: "📝", title: "Réservations", desc: "Réserver un cours ou RDV : avec le coach ou un intervenant extérieur", color: ORANGE },
-      { icon: "💬", title: "Messagerie", desc: "Conversations privées et groupes pour toute l'écurie", color: MAUVE },
-      { icon: "🤝", title: "Demi-pensions", desc: "Déclarer une DP, définir les jours — le DP a le même accès que le propriétaire, journal partagé, sauf finances", color: MAUVE },
-      { icon: "🧥", title: "Couvertures", desc: "Tableau par température jour/nuit + alerte météo automatique au staff quand la température change", color: TEAL },
-      { icon: "🌾", title: "Nourriture", desc: "Ration quotidienne, compléments, traitements en cours, demandes de modification au staff", color: ORANGE },
-      { icon: "📋", title: "Santé basique", desc: "Vaccins, vermifuges, prochains RDV, soins en cours, bandes de repos, alertes automatiques", color: CORAIL },
-      { icon: "🏆", title: "Concours", desc: "Calendrier par mois, intérêt par couple, transport/covoiturage, alerte engagements", color: ORANGE },
-      { icon: "🚚", title: "Location véhicules", desc: "Proposer son van/camion, calendrier de dispo, photos — tout gratuit", color: GREEN },
-      { icon: "🏷️", title: "Petites annonces", desc: "Vendre ses affaires d'occasion aux membres de l'écurie : photo, description, prix", color: ORANGE },
-      { icon: "🔔", title: "Notifications", desc: "Push + email : paddocks, cours, météo/couvertures, vaccins, messages, engagements", color: CORAIL },
-    ];
-
-    const roles = [
-      { who: "Gérant", role: "Administrateur", emoji: "👑", actions: ["Crée l'écurie et configure les paramètres", "Gère les membres et peut exclure si besoin", "Voit tout, peut déléguer des droits admin"], color: TEAL },
-      { who: "Coach", role: "Enseignant", emoji: "🧑‍🏫", actions: ["Publie et modifie les paddocks", "Accepte ou refuse les cours", "Propose la liste des concours de la saison", "Voit le planning complet et toutes les alertes"], color: TEAL },
-      { who: "Cheffe d'écurie", role: "Staff", emoji: "👩‍🌾", actions: ["Publie et modifie les paddocks", "Sort et rentre les chevaux", "Gère les rations et l'alimentation", "Coche les couvertures après alerte météo"], color: ORANGE },
-      { who: "Propriétaire", role: "Membre", emoji: "👩", actions: ["Voit tous les chevaux, enrichit les siens", "Réserve des cours et créneaux paddock", "Tient le journal privé de ses chevaux", "Propose des concours et planifie les RDV intervenants", "Gère la demi-pension et définit les couvertures"], color: CORAIL },
-      { who: "Intervenant extérieur", role: "Véto, maréchal, coach ext.", emoji: "🏥", actions: ["Voit uniquement les chevaux sur lesquels il intervient", "Confirme ou refuse les demandes de RDV ou de cours", "Ajoute un compte-rendu après son passage"], color: GREEN },
-      { who: "Demi-pensionnaire", role: "Accès partagé", emoji: "👩‍🎓", actions: ["Même accès que le propriétaire sur le cheval en DP", "Journal partagé avec le propriétaire", "Pas d'accès aux finances ni assurance"], color: MAUVE },
-    ];
-
-    const principles = [
-      { icon: "👁️", title: "Tout le monde voit tout", desc: "Tous les chevaux, tout le planning. Seuls les finances et le journal restent privés.", color: TEAL },
-      { icon: "🔑", title: "Un profil, des rôles", desc: "Un seul compte. Vos permissions changent selon votre rôle dans chaque écurie.", color: CORAIL },
-      { icon: "🐴", title: "Le cheval au centre", desc: "Staff ou propriétaire ajoute un cheval. Le propriétaire le revendique en un clic.", color: ORANGE },
-      { icon: "🏟️", title: "Carrières en temps réel", desc: "Voir qui utilise quelle carrière et quand pour organiser ses séances.", color: ORANGE },
-      { icon: "📱", title: "Tout dans une app", desc: "Paddocks, cours, messages, santé, concours — une seule app pour tout gérer.", color: MAUVE },
-      { icon: "🌡️", title: "Alertes intelligentes", desc: "Météo, vaccins, RDV, engagements — des notifications quand ça compte.", color: TEAL },
-      { icon: "👤", title: "Utile même seul", desc: "L'app sert dès le premier utilisateur. Plus il y a de monde, plus elle devient puissante.", color: ORANGE },
-      { icon: "💰", title: "100% gratuit", desc: "Pas d'abonnement, pas de commission. Tout est gratuit.", color: GREEN },
-      { icon: "🔗", title: "Inscription libre", desc: "On rejoint une écurie en un clic via un lien d'invitation. Zéro friction.", color: CORAIL },
-    ];
-
-    // Render modules
-    const mg = document.getElementById("modules-grid");
-    modules.forEach(m => {
-      mg.innerHTML += `<div class="module" onmouseenter="this.style.borderColor='${m.color}40';this.style.background='${m.color}06'" onmouseleave="this.style.borderColor='#f0f0f0';this.style.background='#fff'">
-        <div class="module-header">
-          <span class="module-icon">${m.icon}</span>
-          <span class="module-title">${m.title}</span>
-        </div>
-        <div class="module-desc">${m.desc}</div>
-      </div>`;
-    });
-
-    // Render roles
-    const rg = document.getElementById("roles-grid");
-    roles.forEach(r => {
-      const actions = r.actions.map(a => `<div class="role-action"><span style="color:${r.color};flex-shrink:0;margin-top:1px">•</span>${a}</div>`).join("");
-      rg.innerHTML += `<div class="role" style="background:${r.color}06;border:1px solid ${r.color}18">
-        <div class="role-header">
-          <div class="role-avatar" style="background:${r.color}18">${r.emoji}</div>
-          <div>
-            <div class="role-name">${r.who}</div>
-            <div class="role-label" style="color:${r.color}">${r.role}</div>
-          </div>
-        </div>
-        <div class="role-actions">${actions}</div>
-      </div>`;
-    });
-
-    // Render principles
-    const pg = document.getElementById("principles-grid");
-    principles.forEach(p => {
-      pg.innerHTML += `<div class="principle">
-        <div class="principle-icon">${p.icon}</div>
-        <div class="principle-title">${p.title}</div>
-        <div class="principle-desc">${p.desc}</div>
-      </div>`;
-    });
-  </script>
-</body>
-</html>
+COMING SOON — ÉTÉ 2026
+15 modules pour gérer le quotidien de votre écurie
+Paddocks, planning, cours, messagerie, santé, concours… tout dans une seule app.
+15
+MODULES
+6
+RÔLES
+18
+CHEVAUX
+CE QU'ON POURRA FAIRE
+Les 15 modules de la V1
+UNE SEULE APP, DES PERMISSIONS DIFFÉRENTES
+6 rôles — qui fait quoi
+Les principes
+W
+e
+S
+t
+a
+b
+l
+e
+L'ÉCURIE CONNECTÉE
+westable.app • V1 • Écuries de Feucherolles
